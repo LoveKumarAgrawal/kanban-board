@@ -6,6 +6,7 @@ import bcrypt from "bcrypt";
 import { createSession } from "@/lib/sessions";
 import { redirect } from "next/navigation";
 import { RegisterState } from "@/types/type"
+import { cookies } from "next/headers";
 
 export async function register(state: RegisterState, formData: FormData): Promise<RegisterState>{
 
@@ -50,4 +51,41 @@ export async function register(state: RegisterState, formData: FormData): Promis
   })
 
   redirect("/onboarding");
+}
+
+export async function Login(state: RegisterState, formData: FormData): Promise<RegisterState> {
+  const validatedFields = LoginFormSchema.safeParse({
+    email: formData.get("email"),
+    password: formData.get("password"),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors
+    };
+  }
+
+  const { email, password } = validatedFields.data
+  const user = await prisma.user.findFirst({
+    where: {
+      email
+    }
+  })
+  if (!user) return { errors: { email: "Invalid credentials." } };
+
+  const matchedPassword = await bcrypt.compare(password, user.password)
+  if(!matchedPassword) return { errors: { email: "Invalid credentails." } }
+
+  await createSession({
+    id: user.id.toString(),
+    name: user.name,
+  })
+
+  redirect("/onboarding")
+}
+
+export async function logout() {
+  const cookieStore = await cookies();
+  cookieStore.delete("session");
+  redirect("/");
 }
