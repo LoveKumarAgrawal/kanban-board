@@ -53,7 +53,7 @@ export async function register(state: RegisterState, formData: FormData): Promis
   redirect("/onboarding");
 }
 
-export async function Login(state: RegisterState, formData: FormData): Promise<RegisterState> {
+export async function login(state: RegisterState, formData: FormData): Promise<RegisterState> {
   const validatedFields = LoginFormSchema.safeParse({
     email: formData.get("email"),
     password: formData.get("password"),
