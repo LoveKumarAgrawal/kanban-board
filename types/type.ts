@@ -7,3 +7,8 @@ export type RegisterState = {
     };
 
   };
+
+export interface SessionUser {
+  name: string;
+  id: string;
+}

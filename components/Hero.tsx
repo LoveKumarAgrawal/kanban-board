@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Hero() {
     return (
-        <div className="min-h-screen bg-gradient-to-br from-gray-700 to-gray-950 flex flex-col items-center justify-center text-white">
+        <div className="h-screen bg-gradient-to-br from-gray-700 to-gray-950 flex flex-col items-center justify-center text-white flex-wrap-reverse">
             {/* Hero Section */}
             <div className="text-center max-w-4xl px-4">
                 <h1 className="text-5xl font-bold text-blue-300 mb-6">

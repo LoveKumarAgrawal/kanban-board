@@ -1,13 +1,15 @@
 import getAuthUser from "@/lib/getAuthUser";
 import Link from "next/link";
 import { logout } from "@/actions/auth";
+import { SessionUser } from "@/types/type";
+import { JWTPayload } from "jose";
 
 const Navbar = async () => {
     const user = await getAuthUser();
 
     return (
         <nav className="w-full py-3 flex justify-between items-center px-8 bg-gray-900 text-white shadow-md">
-            <div className="text-2xl font-bold text-blue-300">Kanban Board</div>
+            <Link href="/" className="text-2xl font-bold text-blue-300">Kanban Board</Link>
             <div className="flex justify-center items-center gap-3">
                 {user && (
                     <Avatar name={user?.name} size={"big"} />

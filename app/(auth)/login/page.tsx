@@ -11,7 +11,7 @@ const initialState: RegisterState = {
 const Login = () => {
     const [state, action, isPending] = useActionState(login, initialState);
     return (
-        <div className="min-h-screen bg-gray-900 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div className="h-screen bg-gray-900 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
             <div className="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-md">
                 <h1 className="text-3xl font-bold text-center text-white mb-6">Login</h1>
 
