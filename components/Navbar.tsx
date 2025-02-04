@@ -1,8 +1,6 @@
-import getAuthUser from "@/lib/getAuthUser";
+
 import Link from "next/link";
-import { logout } from "@/actions/auth";
-import { SessionUser } from "@/types/type";
-import { JWTPayload } from "jose";
+import getAuthUser, { logout } from "@/actions/auth";
 
 const Navbar = async () => {
     const user = await getAuthUser();

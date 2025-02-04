@@ -18,13 +18,13 @@ model User {
   email         String       @unique
   name          String       
   password      String
-  KanbanBoards  KanbanBoard[]
+  KanbanBoard   KanbanBoard?
 }
 
 model KanbanBoard {
   id         String    @id @default(uuid())
   name       String
-  userId     String
+  userId     String    @unique
   user       User      @relation(fields: [userId], references: [id])
   Tasks      Task[]
 }

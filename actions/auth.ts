@@ -3,7 +3,7 @@
 import { LoginFormSchema, RegisterFormSchema } from "@/lib/schemas";
 import prisma from "@/app/db/index"
 import bcrypt from "bcrypt";
-import { createSession } from "@/lib/sessions";
+import { createSession, decrypt } from "@/lib/sessions";
 import { redirect } from "next/navigation";
 import { RegisterState } from "@/types/type"
 import { cookies } from "next/headers";
@@ -88,4 +88,14 @@ export async function logout() {
   const cookieStore = await cookies();
   cookieStore.delete("session");
   redirect("/");
+}
+
+
+export default async function getAuthUser() {
+    const cookieStore = await cookies()
+    const session = cookieStore.get("session")?.value
+    if(session) {
+        const user = await decrypt(session)
+        return user
+    }
 }

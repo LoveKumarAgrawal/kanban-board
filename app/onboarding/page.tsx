@@ -1,11 +1,17 @@
+import getAuthUser from "@/actions/auth"
+import { getBoardIdForUser } from "@/actions/board"
 import OnboardingForm from "@/components/OnboardingForm"
-import getAuthUser from "@/lib/getAuthUser"
 
 const page = async() => {
     const user = await getAuthUser()
-    console.log(user)
+    const boardId = await getBoardIdForUser()
 
-    return <OnboardingForm />
+    console.log(user)
+    console.log(boardId)
+
+    return (
+        <OnboardingForm user={user.name} boardId={boardId} />
+    )
 }
 
 export default page
