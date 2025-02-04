@@ -14,8 +14,8 @@ datasource db {
 }
 
 model User {
-  id            String       @id @default(uuid())
-  email         String       @unique
+  id            String          @id @default(uuid())
+  email         String          @unique
   name          String       
   password      String
   KanbanBoard   KanbanBoard?
@@ -25,7 +25,7 @@ model KanbanBoard {
   id         String    @id @default(uuid())
   name       String
   userId     String    @unique
-  user       User      @relation(fields: [userId], references: [id])
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   Tasks      Task[]
 }
 
@@ -34,7 +34,7 @@ model Task {
   name        String
   status      Status
   boardId     String
-  board       KanbanBoard     @relation(fields: [boardId], references: [id])
+  board       KanbanBoard     @relation(fields: [boardId], references: [id], onDelete: Cascade)
 }
 
 
