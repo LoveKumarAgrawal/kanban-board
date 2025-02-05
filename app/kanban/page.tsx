@@ -1,8 +1,20 @@
-"use client"
-const page = () => {
-    return <div>
-        this is the main kanban page where all the kanban will be show
-    </div>
+import getAuthUser from "@/actions/auth"
+import prisma from "../db"
+import Board from "@/components/Board"
+
+const page = async() => {
+    const user = await getAuthUser()
+    const board = await prisma.kanbanBoard.findFirst({
+        where: {
+            userId: user?.id
+        },
+        include: {
+            tasks: true
+        }
+    })
+    
+
+    return <Board board={board}/>
 }
 
 export default page

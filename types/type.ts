@@ -14,3 +14,16 @@ export type RegisterState = {
     expiresAt: Date;
     [key: string]: any;
   }
+
+export interface Task {
+  id: string;
+  name: string;
+  status: string;
+}
+
+
+export interface IBoard {
+    id: string;
+    name: string;
+    tasks: Task[]
+}

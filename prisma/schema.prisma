@@ -26,7 +26,7 @@ model KanbanBoard {
   name       String
   userId     String    @unique
   user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  Tasks      Task[]
+  tasks      Task[]
 }
 
 model Task {
