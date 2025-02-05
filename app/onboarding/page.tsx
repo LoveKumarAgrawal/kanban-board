@@ -1,16 +1,14 @@
 import getAuthUser from "@/actions/auth"
 import { getBoardIdForUser } from "@/actions/board"
 import OnboardingForm from "@/components/OnboardingForm"
+import { SessionPayload } from "@/types/type"
 
 const page = async() => {
-    const user = await getAuthUser()
+    const user: SessionPayload | null = await getAuthUser()
     const boardId = await getBoardIdForUser()
 
-    console.log(user)
-    console.log(boardId)
-
     return (
-        <OnboardingForm user={user.name} boardId={boardId} />
+        <OnboardingForm user={user?.name} boardId={boardId} />
     )
 }
 

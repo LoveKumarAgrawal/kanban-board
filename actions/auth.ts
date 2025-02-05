@@ -5,7 +5,7 @@ import prisma from "@/app/db/index"
 import bcrypt from "bcrypt";
 import { createSession, decrypt } from "@/lib/sessions";
 import { redirect } from "next/navigation";
-import { RegisterState } from "@/types/type"
+import { RegisterState, SessionPayload } from "@/types/type"
 import { cookies } from "next/headers";
 
 export async function register(state: RegisterState, formData: FormData): Promise<RegisterState>{
@@ -91,11 +91,12 @@ export async function logout() {
 }
 
 
-export default async function getAuthUser() {
+export default async function getAuthUser(): Promise<SessionPayload | null> {
     const cookieStore = await cookies()
     const session = cookieStore.get("session")?.value
     if(session) {
         const user = await decrypt(session)
-        return user
+        return user as SessionPayload
     }
+    return null
 }

@@ -8,7 +8,9 @@ export type RegisterState = {
 
   };
 
-export interface SessionUser {
-  name: string;
-  id: string;
-}
+  export interface SessionPayload {
+    id: string;
+    name: string;
+    expiresAt: Date;
+    [key: string]: any;
+  }
