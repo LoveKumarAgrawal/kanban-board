@@ -49,7 +49,8 @@ const OnboardingForm = ({
   };
 
   return (
-    <motion.div
+    boardId===null && (
+      <motion.div
       initial="hidden"
       animate="visible"
       exit="exit"
@@ -136,6 +137,7 @@ const OnboardingForm = ({
         </motion.div>
       )}
     </motion.div>
+    )
   );
 };
 

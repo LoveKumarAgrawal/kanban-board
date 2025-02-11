@@ -12,7 +12,6 @@ const page = async() => {
             tasks: true
         }
     })
-    
 
     return <Board board={board}/>
 }
