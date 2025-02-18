@@ -85,3 +85,5 @@ const Modal = ({
         </div>
     )
 }
+
+export default Modal
